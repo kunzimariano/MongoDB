@@ -23,12 +23,15 @@ namespace ConsoleApp
 
             MongoCollection<User> usrCollection = database.GetCollection<User>("Users");
 
-            var user = new User() { Username = "kun", Email = "some@mail.com" };
-            usrCollection.Insert(user);
+            //var user = new User() { Username = "otro", Email = "otro@mail.com" };
+            //usrCollection.Insert(user);
 
-            Console.WriteLine(user.Id);
+            //Console.WriteLine(user.Id);
 
+            IMongoQuery query = Query<User>.EQ(x => x.Username, "kun");
+            User user = usrCollection.FindOne(query);
 
+            Console.WriteLine(user.Username);
 
 
             Console.Read();
