@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Text;
 using ConsoleApp.Entities;
@@ -8,16 +10,24 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
 using MongoDB.Driver.Linq;
+using log4net;
+using log4net.Config;
 
 namespace ConsoleApp
 {
     class Program
     {
+        private static readonly ILog Log = LogManager.GetLogger(typeof(Program));
+
         private const string ConnectionString = "mongodb://localhost";
         private static MongoClient _client;
 
         static void Main(string[] args)
         {
+            XmlConfigurator.Configure(new FileStream(@"Config\log4net.xml", FileMode.Open));
+
+            Log.Error("Foo");
+
             _client = new MongoClient(ConnectionString);
             var database = _client.GetServer().GetDatabase("test");
             MongoCollection<User> usrCollection = database.GetCollection<User>("Users");
