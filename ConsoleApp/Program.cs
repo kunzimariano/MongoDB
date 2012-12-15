@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
@@ -19,16 +20,17 @@ namespace ConsoleApp
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(Program));
 
-        private const string ConnectionString = "mongodb://localhost";
         private static MongoClient _client;
 
         static void Main(string[] args)
         {
+
             XmlConfigurator.Configure(new FileStream(@"Config\log4net.xml", FileMode.Open));
+            Log.Error("Starting...");
 
-            Log.Error("Foo");
 
-            _client = new MongoClient(ConnectionString);
+            _client = new MongoClient(ConfigurationManager.AppSettings["ConnectionString"]);
+
             var database = _client.GetServer().GetDatabase("test");
             MongoCollection<User> usrCollection = database.GetCollection<User>("Users");
 

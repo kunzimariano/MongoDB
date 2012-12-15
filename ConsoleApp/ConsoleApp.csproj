@@ -46,6 +46,7 @@
       <HintPath>..\lib\MongoDBDriver 1.7\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\MongoDBAppender.cs" />
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Program.cs" />
@@ -65,6 +67,7 @@
   <ItemGroup>
     <Content Include="Config\log4net.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
